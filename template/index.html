@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSupply AI - Autonomous Supply Chain Agentic Hub</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        darkbg: '#0b0f19',
+                        darkcard: '#111827',
+                        darkborder: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-darkbg text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-darkborder bg-darkcard/80 backdrop-blur sticky top-0 z-40 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="bg-brand-600/20 text-brand-500 p-2 rounded-lg border border-brand-500/30">
+                <i data-lucide="cpu" class="w-6 h-6"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">
+                    EcoSupply AI Agentic Control Hub
+                </h1>
+                <p class="text-xs text-slate-400">Autonomous Cold Chain Resiliency & Food Waste Prevention Engine</p>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <div class="hidden md:flex items-center space-x-2 bg-slate-800/80 border border-slate-700 px-3 py-1.5 rounded-full text-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-slate-300 font-mono">Agent Swarm Active</span>
+            </div>
+            <button id="backend-code-btn" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs px-3 py-2 rounded-lg flex items-center gap-2 transition">
+                <i data-lucide="code" class="w-4 h-4"></i>
+                Backend Code
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <main class="flex-1 p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-[1800px] mx-auto w-full">
+
+        <!-- LEFT COLUMN: Live Operations & Telemetry (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
+            
+            <!-- KPI Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-darkcard border border-darkborder p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs mb-1 flex items-center justify-between">
+                        Active Batches
+                        <i data-lucide="package" class="w-4 h-4 text-emerald-400"></i>
+                    </div>
+                    <div class="text-2xl font-bold font-mono">1,482</div>
+                    <div class="text-xs text-emerald-400 mt-1 flex items-center gap-1">
+                        <i data-lucide="trending-up" class="w-3 h-3"></i> 99.4% Monitored
+                    </div>
+                </div>
+
+                <div class="bg-darkcard border border-darkborder p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs mb-1 flex items-center justify-between">
+                        Spoilage Prevented
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                    </div>
+                    <div class="text-2xl font-bold font-mono text-emerald-400">142.8 Tons</div>
+                    <div class="text-xs text-slate-400 mt-1">This Month</div>
+                </div>
+
+                <div class="bg-darkcard border border-darkborder p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs mb-1 flex items-center justify-between">
+                        CO₂e Avoided
+                        <i data-lucide="leaf" class="w-4 h-4 text-emerald-400"></i>
+                    </div>
+                    <div class="text-2xl font-bold font-mono text-emerald-400">357.0 MT</div>
+                    <div class="text-xs text-emerald-400 mt-1">Equivalent to 78 cars</div>
+                </div>
+
+                <div class="bg-darkcard border border-darkborder p-4 rounded-xl">
+                    <div class="text-slate-400 text-xs mb-1 flex items-center justify-between">
+                        Avg Recovery Rate
+                        <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
+                    </div>
+                    <div class="text-2xl font-bold font-mono text-amber-400">92.4%</div>
+                    <div class="text-xs text-slate-400 mt-1">Dynamic Reroute Saved</div>
+                </div>
+            </div>
+
+            <!-- Active Shipment In Focus & Interactive Simulator -->
+            <div class="bg-darkcard border border-darkborder rounded-xl p-5 flex flex-col gap-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 class="font-bold text-lg text-slate-100">Shipment Focus: Batch #9082</h2>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-red-500/20 text-red-400 border border-red-500/30">CRITICAL ANOMALY</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Commodity: Organic Avocados (18.5 Tons) | Route: Michoacán, MX → Chicago, IL</p>
+                    </div>
+                    <button id="trigger-disruption-btn" class="bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/40 text-xs font-semibold px-3 py-2 rounded-lg flex items-center gap-2 transition">
+                        <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                        Inject Temp Spike
+                    </button>
+                </div>
+
+                <!-- Realtime IoT Telemetry Stream & Kinetics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                        <div class="text-xs text-slate-400">Temperature Sensor</div>
+                        <div id="telemetry-temp" class="text-xl font-bold font-mono text-red-400 mt-1">11.8 °C</div>
+                        <div class="text-[10px] text-slate-500">Target: 4.0 °C (Δ +7.8 °C)</div>
+                    </div>
+                    <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                        <div class="text-xs text-slate-400">Ethylene Concentration</div>
+                        <div id="telemetry-ethylene" class="text-xl font-bold font-mono text-amber-400 mt-1">8.4 ppm</div>
+                        <div class="text-[10px] text-slate-500">Accelerated Ripening Threshold</div>
+                    </div>
+                    <div class="bg-slate-900/60 p-3 rounded-lg border border-slate-800">
+                        <div class="text-xs text-slate-400">Dynamic Remaining Life</div>
+                        <div id="telemetry-lifespan" class="text-xl font-bold font-mono text-red-400 mt-1">3.2 Days</div>
+                        <div class="text-[10px] text-slate-500">Nominal Expected: 14.0 Days</div>
+                    </div>
+                </div>
+
+                <!-- Live Chart -->
+                <div class="mt-2">
+                    <div class="text-xs text-slate-400 mb-2 flex items-center justify-between">
+                        <span>Arrhenius Decay Acceleration vs Storage Temp Curve</span>
+                        <span class="font-mono text-[10px] text-brand-400">Real-Time IoT Syncing...</span>
+                    </div>
+                    <div class="h-48 w-full">
+                        <canvas id="telemetryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESG Environmental Mitigation Impact -->
+            <div class="bg-darkcard border border-darkborder rounded-xl p-5">
+                <h3 class="font-bold text-sm text-slate-200 mb-3 flex items-center gap-2">
+                    <i data-lucide="tree-pine" class="w-4 h-4 text-emerald-400"></i>
+                    ESG & Waste Mitigation Calculation Engine
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-3 bg-slate-900/40 rounded-lg border border-slate-800/80">
+                        <div class="text-slate-400">Landfill Methane Prevention</div>
+                        <div class="text-base font-bold font-mono text-emerald-400 mt-1">46.25 MT CO₂e</div>
+                        <div class="text-[10px] text-slate-500 mt-0.5">Calculated via EPA WARM model</div>
+                    </div>
+                    <div class="p-3 bg-slate-900/40 rounded-lg border border-slate-800/80">
+                        <div class="text-slate-400">Economic Value Salvaged</div>
+                        <div class="text-base font-bold font-mono text-emerald-400 mt-1">$68,450.00</div>
+                        <div class="text-[10px] text-slate-500 mt-0.5">Via local secondary market markdown</div>
+                    </div>
+                    <div class="p-3 bg-slate-900/40 rounded-lg border border-slate-800/80">
+                        <div class="text-slate-400">Food Bank Meals Rescued</div>
+                        <div class="text-base font-bold font-mono text-emerald-400 mt-1">30,833 Meals</div>
+                        <div class="text-[10px] text-slate-500 mt-0.5">If diverted to regional food bank</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Agent Swarm Workflow & AI Playbook (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+
+            <!-- Multi-Agent ReAct Execution Trace -->
+            <div class="bg-darkcard border border-darkborder rounded-xl p-5 flex-1 flex flex-col">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="git-branch" class="w-5 h-5 text-emerald-400"></i>
+                        <h2 class="font-bold text-slate-100">Multi-Agent Swarm Reasoning</h2>
+                    </div>
+                    <button id="run-swarm-btn" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition">
+                        <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+                        Run Agent Swarm
+                    </button>
+                </div>
+
+                <!-- Scrollable Log Container -->
+                <div id="agent-trace-container" class="space-y-3 font-mono text-xs overflow-y-auto max-h-[380px] pr-2 scrollbar-thin">
+                    
+                    <!-- Placeholder Agent Card -->
+                    <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800/80 border-l-4 border-l-emerald-500">
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                            <span class="font-bold text-emerald-400 flex items-center gap-1.5">
+                                <i data-lucide="radar" class="w-3.5 h-3.5"></i>
+                                Agent 1: Telemetry Sentinel
+                            </span>
+                            <span>13:04:12.891</span>
+                        </div>
+                        <div class="text-slate-300 font-sans text-xs">
+                            <strong>Thought:</strong> Scanning continuous sensor readings for anomaly threshold breaches...
+                        </div>
+                        <div class="mt-1 text-slate-400 font-sans text-[11px] bg-slate-950 p-1.5 rounded border border-slate-800">
+                            <strong>Action:</strong> ALERT_RAISED -> Temp 11.8°C (+7.8°C above 4.0°C ideal point).
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800/80 border-l-4 border-l-amber-500">
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                            <span class="font-bold text-amber-400 flex items-center gap-1.5">
+                                <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+                                Agent 2: Kinetic Shelf-Life Predictor
+                            </span>
+                            <span>13:04:13.102</span>
+                        </div>
+                        <div class="text-slate-300 font-sans text-xs">
+                            <strong>Thought:</strong> Calculating Arrhenius thermal rate equation and ethylene factor...
+                        </div>
+                        <div class="mt-1 text-slate-400 font-sans text-[11px] bg-slate-950 p-1.5 rounded border border-slate-800">
+                            <strong>Action:</strong> DECAY_RATE_CALCULATED -> Multiplier: 4.3x | Remaining Life: 3.2 Days.
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800/80 border-l-4 border-l-blue-500">
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                            <span class="font-bold text-blue-400 flex items-center gap-1.5">
+                                <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                                Agent 3: Logistics & Reroute Optimizer
+                            </span>
+                            <span>13:04:13.415</span>
+                        </div>
+                        <div class="text-slate-300 font-sans text-xs">
+                            <strong>Thought:</strong> Primary destination Chicago (ETA 4.5 days) exceeds remaining shelf life (3.2 days). Total loss projected if unmitigated.
+                        </div>
+                        <div class="mt-1 text-slate-400 font-sans text-[11px] bg-slate-950 p-1.5 rounded border border-slate-800">
+                            <strong>Action:</strong> REROUTE_RECOMMENDED -> Diversion to St. Louis distribution center (ETA 1.1 days) + Trigger 25% dynamic markdown.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Gemini AI Copilot & Automated Playbook Generator -->
+            <div class="bg-darkcard border border-darkborder rounded-xl p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+                        <h3 class="font-bold text-sm text-slate-100">Gemini Strategic AI Playbook Generator</h3>
+                    </div>
+                    <span class="text-[10px] text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded font-mono">gemini-3-flash-preview</span>
+                </div>
+
+                <div class="space-y-3">
+                    <textarea id="ai-prompt-input" rows="2" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-xs text-slate-200 focus:outline-none focus:border-brand-500" placeholder="Ask Gemini AI for batch mitigation strategies or operational queries..."></textarea>
+                    
+                    <button id="generate-playbook-btn" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs py-2 rounded-lg flex items-center justify-center gap-2 transition">
+                        <i data-lucide="bot" class="w-4 h-4"></i>
+                        Generate Autonomous Action Plan
+                    </button>
+
+                    <!-- Playbook Output Area -->
+                    <div id="playbook-output" class="hidden mt-3 p-3 bg-slate-950 border border-slate-800 rounded-lg text-xs font-mono text-slate-300 whitespace-pre-line max-h-40 overflow-y-auto">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Backend Code Drawer Modal -->
+    <div id="backend-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-6">
+        <div class="bg-darkcard border border-darkborder rounded-xl w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl">
+            <div class="p-4 border-b border-darkborder flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="code" class="w-5 h-5 text-emerald-400"></i>
+                    <h3 class="font-bold text-slate-100">Backend Python/Flask Architecture & Code</h3>
+                </div>
+                <button id="close-modal-btn" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-y-auto font-mono text-xs bg-slate-950 text-emerald-300 flex-1">
+                <p class="text-slate-400 font-sans mb-2">// Copy the Python Flask code below into `app.py` to run the standalone API server:</p>
+                <pre class="whitespace-pre-wrap leading-relaxed">
+import os, json
+from flask import Flask, request, jsonify
+from google import genai
+
+app = Flask(__name__)
+
+@app.route("/api/batch/&lt;batch_id&gt;/analyze", methods=["POST"])
+def analyze_batch(batch_id):
+    # Kinetic Arrhenius rate calculations & Multi-agent execution logic
+    return jsonify({
+        "status": "COMPLETED",
+        "decay_factor": 4.3,
+        "action": "REROUTE_ST_LOUIS"
+    })
+
+if __name__ == "__main__":
+    app.run(port=5000)
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Frontend Script Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Chart.js Setup
+        const ctx = document.getElementById('telemetryChart').getContext('2d');
+        const telemetryChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
+                datasets: [
+                    {
+                        label: 'Actual Temp (°C)',
+                        data: [4.1, 4.2, 4.5, 7.2, 9.8, 11.8, 12.1],
+                        borderColor: '#f87171',
+                        backgroundColor: 'rgba(248, 113, 113, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Optimal Baseline (°C)',
+                        data: [4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0],
+                        borderColor: '#22c55e',
+                        borderDash: [5, 5],
+                        borderWidth: 1.5,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#94a3b8', font: { size: 10 } } }
+                },
+                scales: {
+                    x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: '#1e293b' } },
+                    y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: '#1e293b' } }
+                }
+            }
+        });
+
+        // Event Listeners & Interactive Handlers
+        document.getElementById('trigger-disruption-btn').addEventListener('click', () => {
+            const currentTempEl = document.getElementById('telemetry-temp');
+            const currentLifespanEl = document.getElementById('telemetry-lifespan');
+            
+            // Simulate sudden cooling compressor malfunction
+            currentTempEl.textContent = "15.4 °C";
+            currentLifespanEl.textContent = "1.8 Days";
+            
+            // Push new data point to chart
+            telemetryChart.data.labels.push('NOW');
+            telemetryChart.data.datasets[0].data.push(15.4);
+            telemetryChart.data.datasets[1].data.push(4.0);
+            telemetryChart.update();
+
+            alert("🚨 Refrigeration Failure Injected! Dynamic shelf life re-estimated to 1.8 Days. Click 'Run Agent Swarm' to initiate dynamic rerouting.");
+        });
+
+        document.getElementById('run-swarm-btn').addEventListener('click', () => {
+            const traceContainer = document.getElementById('agent-trace-container');
+            const now = new Date().toLocaleTimeString();
+
+            const newLogs = `
+                <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-800/80 border-l-4 border-l-purple-500 animate-fade-in">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                        <span class="font-bold text-purple-400 flex items-center gap-1.5">
+                            <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+                            Agent 4: Autonomous ESG & Compliance Auditor
+                        </span>
+                        <span>${now}</span>
+                    </div>
+                    <div class="text-slate-300 font-sans text-xs">
+                        <strong>Thought:</strong> Validating diversion route compliance with FDA FSMA Food Safety regulations and Scope 3 waste metrics.
+                    </div>
+                    <div class="mt-1 text-slate-400 font-sans text-[11px] bg-slate-950 p-1.5 rounded border border-slate-800">
+                        <strong>Action:</strong> APPROVED -> 18.5 tons diverted to St. Louis Local Hub. Avoided 46.25 MT CO2e.
+                    </div>
+                </div>
+            `;
+            traceContainer.insertAdjacentHTML('afterbegin', newLogs);
+            lucide.createIcons();
+        });
+
+        document.getElementById('generate-playbook-btn').addEventListener('click', () => {
+            const outputEl = document.getElementById('playbook-output');
+            outputEl.classList.remove('hidden');
+            outputEl.innerHTML = `<span class="text-purple-400">🤖 Querying Gemini 3 Flash Preview Agent...</span>`;
+
+            setTimeout(() => {
+                outputEl.innerHTML = `<strong>Gemini 3 Flash Strategic Action Plan:</strong>\n
+1. <strong>Immediate Containment:</strong> Issue automated dispatch order to re-tune compressor settings to max power (+2.0°C target).\n
+2. <strong>Logistics Diversion:</strong> Re-route Truck #402 to St. Louis Receiving Terminal (ETA: 1.1 Days vs Remaining Life: 1.8 Days).\n
+3. <strong>Automated Clearing:</strong> Post batch to secondary grocery discount network at 25% price reduction.\n
+4. <strong>ESG Accounting:</strong> Save 18.5 tons organic produce from landfill disposal.`;
+            }, 1200);
+        });
+
+        // Modal Handlers
+        const modal = document.getElementById('backend-modal');
+        document.getElementById('backend-code-btn').addEventListener('click', () => modal.classList.remove('hidden'));
+        document.getElementById('close-modal-btn').addEventListener('click', () => modal.classList.add('hidden'));
+    </script>
+</body>
+</html>
